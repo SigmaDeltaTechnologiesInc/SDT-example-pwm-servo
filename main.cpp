@@ -1,4 +1,4 @@
-/* SDT-example-pwm-robotArm
+/* SDT-example-pwm-servo
  *
  * Copyright (c) 2018 Sigma Delta Technologies Inc.
  *
@@ -38,8 +38,8 @@ PwmOut pwmOut_servo2(PWM2);    // GPIO0
 PwmOut pwmOut_servo3(PWM3);    // GPIO1
 PwmOut* pPwmOut_servo = &pwmOut_servo2;
 
-float duty = 0.100;
-bool flag = false;
+float f_duty = 0.100;
+bool b_flag = false;
 
 int main(void) {
     serial_pc.printf("< Sigma Delta Technologies Inc. >\n\r");
@@ -58,18 +58,18 @@ int main(void) {
     wait(2);
 
     while(true) {
-        pPwmOut_servo->write(duty);
+        pPwmOut_servo->write(f_duty);
 
-        if(flag) {
-            duty = duty + 0.001f;
-            if(duty >= 0.100) {
-                flag = false;
+        if(b_flag) {
+            f_duty = f_duty + 0.001f;
+            if(f_duty >= 0.100) {
+                b_flag = false;
             }
         }
         else {
-            duty = duty - 0.001f;
-            if(duty <= 0.050) {
-                flag = true;
+            f_duty = f_duty - 0.001f;
+            if(f_duty <= 0.050) {
+                b_flag = true;
             }
         }
         
